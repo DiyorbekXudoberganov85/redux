@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import {icon} from '../constant'
 import { Input } from '../ui'
-import { registerStart } from '../slice/auth'
+import { registerStart , registerSuccess , registerFailure} from '../slice/auth'
 import { useSelector, useDispatch } from 'react-redux'
+import AuthService from '../service/auth'
 const Register = () => {
   const [name, setname] = useState('')
   const [email, setEmail] = useState('')
@@ -11,10 +12,24 @@ const Register = () => {
 
   const dispatch = useDispatch()  
   const {isLoading} = useSelector(state => state.auth)
-  console.log(isLoading)
-  const loginHendler = (e) => {
+  const loginHendler = async(e) => {
   e.preventDefault();
   dispatch(registerStart())
+  const user = {
+    username: name,
+    email,
+    password
+  }
+  try { 
+    const response = await AuthService.userRegister(user)
+    console.log(response)
+    console.log(user)
+   dispatch(registerSuccess())
+  } catch (error) {
+    dispatch(registerFailure())
+  }
+  
+  
 }
   return (
     <div className="text-center mt-5"> 
@@ -28,7 +43,6 @@ const Register = () => {
               
             
         <button className="btn btn-primary w-100 py-2 mt-2" disabled={isLoading} onClick={loginHendler} type="submit">{isLoading ? 'Regitried...' : 'Registratsiya'}</button> 
-           
                </form> 
                </main>
     </div>
