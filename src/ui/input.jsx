@@ -1,4 +1,4 @@
-import {useState} from 'react'
+// import {useState} from 'react'
 const Input = ({label , state ,setState ,type = "text"}) => {
 
   return (
