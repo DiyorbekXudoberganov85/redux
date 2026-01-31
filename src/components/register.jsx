@@ -4,6 +4,7 @@ import { Input } from '../ui'
 import { signUserStart ,signUserSuccess , signUserFailure} from '../slice/auth'
 import { useSelector, useDispatch } from 'react-redux'
 import AuthService from '../service/auth'
+import {ValidationError} from './'
 const Register = () => {
   const [name, setname] = useState('')
   const [email, setEmail] = useState('')
@@ -22,8 +23,6 @@ const Register = () => {
   }
   try { 
     const response = await AuthService.userRegister(user)
-    console.log(response)
-    console.log(user)
    dispatch(signUserSuccess(response.user))
   } catch (error) {
     console.log(error.response.data)
@@ -38,6 +37,7 @@ const Register = () => {
       <form> 
         <img className="mb-4" src={icon} alt="" width="95" height="95"/> 
         <h1 className="h3 mb-3 fw-normal">Please register</h1> 
+        <ValidationError />
         <Input label='Username' state={name} setState={setname}/>
         <Input label='Email address' state={email} setState={setEmail}/>
         <Input label='Password' type='password' state={password} setState={setPassword}/>
