@@ -16,14 +16,16 @@ const Navbar = () => {
             <>
               <p className='me-3 py-2 m-0 link-body-emphasis text-decoration-none'>{user.username}</p>
               <button className='btn btn-outline-danger'>Log Out</button>
-              <Link className="me-3 py-2 link-body-emphasis text-decoration-none" to="/register">
-            Register
-          </Link>
+             
             </>
 
           
-          ) :(
-            <><Link className="me-3 py-2 link-body-emphasis text-decoration-none" to="/login">
+          ) :( 
+          
+            <><Link className="me-3 py-2 link-body-emphasis text-decoration-none" to="/register">
+            Register
+          </Link>
+          <Link className="me-3 py-2 link-body-emphasis text-decoration-none" to="/login">
             Login
           </Link>
 
