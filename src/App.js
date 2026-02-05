@@ -5,6 +5,8 @@ import { useEffect } from 'react';
 import { signUserSuccess } from './slice/auth';
 import { useDispatch } from 'react-redux';
 import {getItem} from './helpers/persistencs-storege'
+import ArticlesServise from './service/articles';
+import { getArticlesStart, getArticlesSuccess } from './slice/articles';
 const App = () => {
 const dispatch = useDispatch();
 const getUser = async () => {
@@ -19,11 +21,25 @@ console.log(response)
 }
 }
 
+
+
+const getArticles = async() => {
+  dispatch(getArticlesStart())
+  try{
+    const response = await ArticlesServise.getArticles();
+    console.log(response)
+    dispatch(getArticlesSuccess(response.articles))
+  }catch(error){
+    console.log(error)
+  }
+}
+
 useEffect(() => {
   const token = getItem('token')
   if (token){
     getUser()
   }
+  getArticles()
   
 } ,[])
   return (

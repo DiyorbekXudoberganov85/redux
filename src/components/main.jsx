@@ -1,10 +1,60 @@
-
+import { useSelector } from "react-redux";
 const Main = () => {
+  const {articles} = useSelector(state => state.article)
   return (
-    <div>
-      Main
-    </div>
-  )
-}
+    <div className="container">
+      <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      {articles.map(item => (
+<div className="col" key={item.id}>
+          <div className="card shadow-sm">
+            <svg
+              aria-label="Placeholder: Thumbnail"
+              className="bd-placeholder-img card-img-top"
+              width="100%"
+              height="225"
+              role="img"
+              preserveAspectRatio="xMidYMid slice"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <title>Placeholder</title>
+              <rect width="100%" height="100%" fill="#55595c" />
+              <text x="50%" y="50%" fill="#eceeef" dy=".3em">
+                Thumbnail
+              </text>
+            </svg>
 
-export default Main
+            <div className="card-body">
+              <p className="card-text">
+                This is a wider card with supporting text below as a natural
+                lead-in to additional content. This content is a little bit
+                longer.
+              </p>
+
+              <div className="d-flex justify-content-between align-items-center">
+                <div className="btn-group">
+                  <button
+                    type="button"
+                    className="btn btn-sm btn-outline-secondary"
+                  >
+                    View
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-sm btn-outline-secondary"
+                  >
+                    Edit
+                  </button>
+                </div>
+                <small className="text-body-secondary">9 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+      )}
+      </div>
+    </div>
+  );
+};
+
+export default Main;
